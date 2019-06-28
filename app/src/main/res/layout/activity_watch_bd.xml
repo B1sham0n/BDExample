@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_watchBD"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DATABASE OUTPUT"
         android:layout_margin="5dp"
         android:textSize="20sp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@color/colorText"/>
     <include
         layout="@layout/my_db"
         android:layout_width="match_parent"

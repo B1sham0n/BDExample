@@ -18,13 +18,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Dialog.DialogIdListener {
 
     Button btnAdd, btnDel, btnUpd, btnDelAll, btnRead;
     TextView tvOut;
     EditText edName, edSurname, edAge, edId;
     DBHelper dbHelper;
     Intent intent;
+    Integer ID;
+    SQLiteDatabase db;
     //String nameDB = "testDB";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         btnRead.setOnClickListener(btnListener);
         btnDelAll.setOnClickListener(btnListener);
 
-
         tvOut = findViewById(R.id.tvOut);
 
         edName = findViewById(R.id.edName);
@@ -53,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
         intent = new Intent(this, Activity_watchBD.class);
 
         dbHelper = new DBHelper(this);
-
-
     }
 
     View.OnClickListener btnListener = new View.OnClickListener(){
@@ -62,33 +61,38 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {
             ContentValues cv = new ContentValues();
 
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            db = dbHelper.getWritableDatabase();
 
             if(view.getId() == R.id.btnAdd){
+                try {
+                    String name = edName.getText().toString();
+                    String surname = edSurname.getText().toString();
+                    Integer age = Integer.parseInt(edAge.getText().toString());
+                    //Integer id = Integer.parseInt(edId.getText().toString());
+                    //cv.put("id", id);
+                    cv.put("name", name);
+                    cv.put("surname", surname);
+                    cv.put("age", age);
 
-                String name = edName.getText().toString();
-                String surname = edSurname.getText().toString();
-                Integer age = Integer.parseInt(edAge.getText().toString());
-                Integer id = Integer.parseInt(edId.getText().toString());
+                    db.insert("testTable", null, cv);
 
-                //cv.put("id", id);
-                cv.put("name", name);
-                cv.put("surname", surname);
-                cv.put("age", age);
+                    tvOut.append("Row added to database" + "\n");
+                }catch (NumberFormatException e){
+                    tvOut.append("Error in added to database" + "\n");
+                }
 
-                db.insert("testTable", null, cv);
-
-                tvOut.append("Row added to database" + "\n");
             }
             if(view.getId() == R.id.btnDel){
-                Integer id = Integer.parseInt(edId.getText().toString());
-                deleteFromDB(db, id);
-                tvOut.append("Row[" + id + "] deleted from database" + "\n");
+                //Integer id = Integer.parseInt(edId.getText().toString());
+                //deleteFromDB(db, id);
+                openDialogId();
             }
             if(view.getId() == R.id.btnUpd){
                 String name = edName.getText().toString();
                 String surname = edSurname.getText().toString();
                 Integer age = Integer.parseInt(edAge.getText().toString());
+
+                tvOut.append("New id = " + ID + "\n");
                 Integer id = Integer.parseInt(edId.getText().toString());
                 updateDB(db, name, surname, age, id);
                 tvOut.append("Row [" + id + "] updated in database"+ "\n");
@@ -107,7 +111,21 @@ public class MainActivity extends AppCompatActivity {
             dbHelper.close();
         }
     };
+    public void openDialogId(){
+        Dialog dialogId = new Dialog();
+        dialogId.show(getSupportFragmentManager(), "Dialog");
+    }
+
+    @Override
+    public void applyId(Integer id) {
+        ID = id;
+        db = dbHelper.getWritableDatabase();
+        db.delete("testTable","id = " + id,null);
+        tvOut.append("Row[" + ID + "] deleted from database" + "\n");
+        dbHelper.close();
+    }
     public void updateDB(SQLiteDatabase db, String name, String surname, int age, int id){
+        /*
         ContentValues cv = new ContentValues();
         Cursor c = db.query("testTable", null,null, null,
                 null, null, null);
@@ -126,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             }while(c.moveToNext());
         }
         c.close();
-
+        */
     }
     public void deleteFromDB(SQLiteDatabase db, Integer id){
         ContentValues cv = new ContentValues();
@@ -134,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> arrName = new ArrayList<>();
         ArrayList<String> arrSurname = new ArrayList<>();
         ArrayList<Integer> arrAge = new ArrayList<>();
-        Calendar tempCalend = Calendar.getInstance();
+
         Cursor c = db.query("testTable", null,null, null,
                 null, null, null);
         int j = 0;

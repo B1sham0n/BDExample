@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="30"
+            android:layout_weight="10"
             android:layout_margin="5dp"
-            android:gravity="right">
+            android:gravity="left">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="70">
+            android:layout_weight="90">
             <EditText
                 android:id="@+id/edName"
                 android:layout_width="match_parent"
@@ -140,7 +140,7 @@
             android:id="@+id/btnUpd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update at"
+            android:text="Update"
             android:layout_weight="1"
             android:textSize="18sp"
             android:background="#2e2d2e"
@@ -173,15 +173,16 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:verticalScrollbarPosition="right">
+            android:verticalScrollbarPosition="right"
+            android:background="@color/colorPrimaryDark">
             <TextView
                 android:id="@+id/tvOut"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="#c5c7c5"
-                android:layout_margin="5dp"/>
-
+                android:layout_margin="5dp"
+                android:background="@color/colorPrimary"/>
         </ScrollView>
     </LinearLayout>
 </LinearLayout >
