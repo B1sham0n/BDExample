@@ -6,7 +6,8 @@
     tools:context=".MainActivity"
     android:orientation="horizontal"
     android:background="#3a383a"
-    android:weightSum="100">
+    android:weightSum="100"
+    android:baselineAligned="false">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,7 +19,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Input data:"
+            android:text="@string/head_text"
             android:textSize="20sp"
             android:textColor="#c5c7c5"
             android:gravity="center"
@@ -28,47 +29,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="100"
-        android:layout_weight="1">
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_weight="10"
-            android:layout_margin="5dp"
-            android:gravity="left">
+            android:layout_margin="5dp">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name:"
-                android:textSize="20sp"
-                android:layout_weight="2"
+                android:text="@string/string1"
                 android:layout_marginTop="10dp"
-                android:textColor="#c5c7c5"/>
+                style="@style/tvStyle"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Surname:"
-                android:textSize="20sp"
+                android:text="@string/string2"
                 android:layout_marginTop="18dp"
-                android:layout_weight="2"
-                android:textColor="#c5c7c5"/>
+                style="@style/tvStyle"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Age:"
-                android:textSize="20sp"
+                android:text="@string/string3"
                 android:layout_marginTop="18dp"
-                android:layout_weight="2"
-                android:textColor="#c5c7c5"/>
+                style="@style/tvStyle"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Id:"
-                android:textSize="20sp"
+                android:text="@string/stringId"
                 android:layout_marginTop="18dp"
-                android:layout_weight="3"
-                android:textColor="#c5c7c5"/>
+                style="@style/tvStyle"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -77,28 +61,24 @@
             android:layout_weight="90">
             <EditText
                 android:id="@+id/edName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#c5c7c5"
-                android:backgroundTint="@color/colorAccent"/>
+                style="@style/etStyle"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill,LabelFor" />
             <EditText
                 android:id="@+id/edSurname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#c5c7c5"
-                android:backgroundTint="@color/colorAccent"/>
+                style="@style/etStyle"
+                android:inputType="textPersonName"
+                tools:ignore="Autofill,LabelFor" />
             <EditText
                 android:id="@+id/edAge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#c5c7c5"
-                android:backgroundTint="@color/colorAccent"/>
+                style="@style/etStyle"
+                android:inputType="number"
+                tools:ignore="Autofill,LabelFor"  />
             <EditText
                 android:id="@+id/edId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#c5c7c5"
-                android:backgroundTint="@color/colorAccent"/>
+                style="@style/etStyle"
+                android:inputType="number"
+                tools:ignore="Autofill,LabelFor"/>
         </LinearLayout>
 
         </LinearLayout>
@@ -110,35 +90,20 @@
             android:weightSum="3">
             <Button
                 android:id="@+id/btnAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add"
-                android:layout_weight="1"
+                android:text="@string/btnAdd"
+                style="@style/btnStyle"
                 android:textSize="14sp"
-                android:background="#2e2d2e"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="5dp"
                 />
             <Button
                 android:id="@+id/btnDel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete at"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:background="#2e2d2e"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="5dp"/>
+                android:text="@string/btnDeleteAt"
+                style="@style/btnStyle"
+                android:textSize="14sp"/>
             <Button
                 android:id="@+id/btnDelAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete all"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:background="#2e2d2e"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="5dp"/>
+                android:text="@string/btnDeleteAll"
+                style="@style/btnStyle"
+                android:textSize="14sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,27 +111,16 @@
             android:orientation="horizontal"
             android:layout_marginTop="3dp"
             android:weightSum="2">
-
             <Button
                 android:id="@+id/btnUpd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Update"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:background="#2e2d2e"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="5dp"/>
+                android:text="@string/btnUpdate"
+                style="@style/btnStyle"
+                android:textSize="14sp"/>
             <Button
                 android:id="@+id/btnRead"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Read DB"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:background="#2e2d2e"
-                android:textColor="@color/colorAccent"
-                android:layout_margin="5dp"/>
+                android:text="@string/btnRead"
+                style="@style/btnStyle"
+                android:textSize="14sp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -175,16 +129,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_weight="40"
-        android:layout_marginLeft="5dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            tools:ignore="UselessParent">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Logchat"
+                android:text="@string/logchat"
                 android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="#c5c7c5"

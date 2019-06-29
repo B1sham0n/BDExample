@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Database</string>
+    <string name="head_text">Input data:</string>
+    <string name="string1">Name:</string>
+    <string name="string2">Surname:</string>
+    <string name="string3">Age:</string>
+    <string name="stringId">Id:</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnDeleteAt">Delete at</string>
+    <string name="btnDeleteAll">Delete all</string>
+    <string name="btnUpdate">Update</string>
+    <string name="btnRead">Read DB</string>
+    <string name="logchat">Logchat</string>
 </resources>

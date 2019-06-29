@@ -29,13 +29,13 @@ public class Activity_watchBD extends AppCompatActivity {
         Context mContext = getApplicationContext();
         LinearLayout scrollLayout = findViewById(R.id.scroll_layout);
 
-
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-
 
         Cursor c = db.query("testTable", null,null, null,
                 null, null, null);
+
+        //далее в цикле создаем childView до тех пор, пока не закончится бд
+        //при этом каждый раз перемещаем курсор и берем новые значения строки
         if(c.moveToFirst()) {
             do{
                 childView = inflater.inflate(R.layout.my_db, null);
@@ -55,7 +55,7 @@ public class Activity_watchBD extends AppCompatActivity {
             }while(c.moveToNext());
         }
         else
-            System.out.println("EMPTYYYYYYY");
+            System.out.println("EMPTY");
         c.close();
 
 

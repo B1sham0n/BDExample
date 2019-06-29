@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class Dialog extends AppCompatDialogFragment {
     private EditText edId;
-    private DialogIdListener listener;
+    private DialogIdListener listener;//интерфейс
     @Override
     public android.app.Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
@@ -36,6 +37,7 @@ public class Dialog extends AppCompatDialogFragment {
                     Integer id = Integer.parseInt(edId.getText().toString());
                     listener.applyId(id);
                 }catch (NumberFormatException e){
+                    Toast.makeText(getActivity(), "Wrong id", Toast.LENGTH_SHORT).show();//всплывающее окно с текстом
                     System.out.println("Error");
                 }
             }
@@ -47,13 +49,13 @@ public class Dialog extends AppCompatDialogFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (DialogIdListener) context;
+            listener = (DialogIdListener) context;//объявляем интерфейс
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must implement DialogIdListener");
         }
     }
 
     public interface DialogIdListener{
-        void applyId(Integer id);
+        void applyId(Integer id);//этот метод потом вызываем в MainActivity для работы с id
     }
 }

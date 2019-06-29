@@ -1,7 +1,5 @@
 package android.example.bdexample;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +7,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -56,6 +56,18 @@ public class MainActivity extends AppCompatActivity implements Dialog.DialogIdLi
         dbHelper = new DBHelper(this);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("logchat", tvOut.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        tvOut.setText(savedInstanceState.getString("logchat"));
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     View.OnClickListener btnListener = new View.OnClickListener(){
         @Override
         public void onClick(View view) {
@@ -88,12 +100,25 @@ public class MainActivity extends AppCompatActivity implements Dialog.DialogIdLi
                 openDialogId();
             }
             if(view.getId() == R.id.btnUpd){
-                String name = edName.getText().toString();
-                String surname = edSurname.getText().toString();
-                Integer age = Integer.parseInt(edAge.getText().toString());
+                String name = null;
+                String surname = null;
+                Integer age = null;
+                try {
+                    name = edName.getText().toString();
+                    surname = edSurname.getText().toString();
+                    age = Integer.parseInt(edAge.getText().toString());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    tvOut.append("Wrong parameters for update \n");
+                }
 
-                tvOut.append("New id = " + ID + "\n");
-                Integer id = Integer.parseInt(edId.getText().toString());
+                Integer id = null;
+                try {
+                    id = Integer.parseInt(edId.getText().toString());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    tvOut.append("Wrong id for update \n");
+                }
                 updateDB(db, name, surname, age, id);
                 tvOut.append("Row [" + id + "] updated in database"+ "\n");
             }
@@ -124,21 +149,25 @@ public class MainActivity extends AppCompatActivity implements Dialog.DialogIdLi
         tvOut.append("Row[" + ID + "] deleted from database" + "\n");
         dbHelper.close();
     }
-    public void updateDB(SQLiteDatabase db, String name, String surname, int age, int id){
-        /*
+    public void updateDB(SQLiteDatabase db, String name, String surname, Integer age, Integer id){
+
         ContentValues cv = new ContentValues();
+        if(id != null)
+            cv.put("id", id);
+        if(name != null)
+            cv.put("name", name);
+        if(age != null)
+            cv.put("age", age);
+        if(surname != null)
+            cv.put("surname", surname);
+        db.update("testTable", cv,"id = " + id, null);
+        /*
         Cursor c = db.query("testTable", null,null, null,
                 null, null, null);
-
         int j = 0;
         if(c.moveToFirst()) {
             do{
                 if(j == id){
-                    cv.put("id", j);
-                    cv.put("name", name);
-                    cv.put("age", age);
-                    cv.put("surname", surname);
-                    db.update("testTable", cv,"id = " + id, null);
                 }
                 j++;
             }while(c.moveToNext());

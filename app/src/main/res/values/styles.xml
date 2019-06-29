@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -7,5 +7,28 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="MatchP_WrapC">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="WrapC_WrapC">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="tvStyle" parent="WrapC_WrapC">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:textColor">#c5c7c5</item>
+    </style>
+    <style name="etStyle" parent="MatchP_WrapC">
+        <item name="android:textColor">#c5c7c5</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/colorAccent</item>
+    </style>
+    <style name="btnStyle" parent="WrapC_WrapC">
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">#2e2d2e</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:layout_margin">5dp</item>
+    </style>
 </resources>
